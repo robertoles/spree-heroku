@@ -24,14 +24,6 @@ Install the new gems with bundler:
 bundle install
 </pre>
 
-Specify the S3 credentials via Heroku's environment variables:
-
-<pre>
-heroku config:add S3_KEY=[your S3 key]
-heroku config:add S3_SECRET=[your S3 secret]
-heroku config:add S3_BUCKET=[your S3 bucket]
-</pre>
-
 Create a Heroku application and deploy it:
 
 <pre>
@@ -42,10 +34,12 @@ heroku create
 git push heroku master
 </pre>
 
-Enable SSL, since Spree uses SSL for administration and payment flow in its standard setup:
+Specify the S3 credentials via Heroku's environment variables:
 
 <pre>
-heroku addons:add "Piggyback SSL"
+heroku config:add S3_KEY=[your S3 key]
+heroku config:add S3_SECRET=[your S3 secret]
+heroku config:add S3_BUCKET=[your S3 bucket]
 </pre>
 
 Bootstrap the database locally (not possible in Heroku, because the rake task attempts to copy files), and transfer it to Heroku:
