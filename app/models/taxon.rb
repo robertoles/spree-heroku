@@ -8,15 +8,17 @@ class Taxon < ActiveRecord::Base
   validates :name, :presence => true
 
   has_attached_file :icon,
-                :styles => { :mini => '32x32>', :normal => '128x128>' },
-                :default_style => :mini,
-                :path => "assets/taxons/:id/:style/:basename.:extension",
-                :storage => "s3",
-                :s3_credentials => {
-                  :access_key_id => ENV['S3_KEY'],
-                  :secret_access_key => ENV['S3_SECRET']
-                },
-                :bucket => ENV['S3_BUCKET']
+    :styles => { :mini => '32x32>', :normal => '128x128>' },
+    :default_style => :mini,
+    :path => ":rails_root/public/assets/taxons/:id/:style/:basename.:extension",
+    :default_url => "/images/default_taxon.png",
+    :url => "/assets/taxons/:id/:style/:basename.:extension",
+    :storage => Rails.env == 'production' ? 's3' : 'filesystem',
+    :s3_credentials => {
+      :access_key_id => ENV['S3_KEY'],
+      :secret_access_key => ENV['S3_SECRET']
+    },
+    :bucket => ENV['S3_BUCKET']
 
   include ::ProductFilters  # for detailed defs of filters
 
