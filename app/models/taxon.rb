@@ -10,7 +10,7 @@ class Taxon < ActiveRecord::Base
   has_attached_file :icon,
     :styles => { :mini => '32x32>', :normal => '128x128>' },
     :default_style => :mini,
-    :path => ":rails_root/public/assets/taxons/:id/:style/:basename.:extension",
+    :path => "beevalve/public/assets/taxons/:id/:style/:basename.:extension",
     :default_url => "/images/default_taxon.png",
     :url => "/assets/taxons/:id/:style/:basename.:extension",
     :storage => Rails.env == 'production' ? 's3' : 'filesystem',
